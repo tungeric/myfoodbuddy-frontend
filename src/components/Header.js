@@ -6,12 +6,17 @@ class Header extends Component {
 
   render() {
     return (
-      <div className='flex pa1 justify-between nowrap orange'>
-        <div className='flex flex-fixed black'>
-          <div className='fw7 mr1'>Hacker News</div>
-          <Link to='/' className='ml1 no-underline black'>Home</Link>
-          <div className='ml1'>|</div>
-          <Link to='/create' className='ml1 no-underline black'>Create Food</Link>
+      <div className='header'>
+        <div className='header-text'>
+          <div className='header-logo'>MyFoodBuddy</div>
+          <div className='header-right'>
+            <Link to='/' className='header-link-container'>
+              <div className = 'header-link'>Track Meals</div>
+            </Link>
+            <Link to='/create' className='header-link-container'>
+              <div className = 'header-link'>Create Food</div>
+            </Link>
+          </div>
         </div>
       </div>
     )
