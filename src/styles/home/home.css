@@ -1,0 +1,7 @@
+.splash-ui {
+  height: 96vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-image: url("http://res.cloudinary.com/dfafbqoxx/image/upload/v1510506841/background-1932466_1920_crmw6h.jpg");
+}

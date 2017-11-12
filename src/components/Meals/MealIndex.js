@@ -5,7 +5,7 @@ import gql from 'graphql-tag'
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-
+// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import Meal from './Meal'
 
 class MealIndex extends Component {
@@ -14,6 +14,13 @@ class MealIndex extends Component {
     this.state = {
       startDate: moment()
     };
+    this.handleDateChange = this.handleDateChange.bind(this);
+  }
+
+  handleDateChange(date) {
+    this.setState({
+      startDate: date
+    });
   }
 
   render() {
@@ -29,8 +36,9 @@ class MealIndex extends Component {
     const mealsToRender = this.props.allMealsQuery.allMeals
 
     return (
-      <div>
-        <DatePicker selected = {this.state.startDate}
+      <div className="main-body">
+        <DatePicker className="calendar"
+                    selected = {this.state.startDate}
                     onChange={this.handleDateChange}/>
         <div>
           {mealsToRender.map(meal => (
@@ -49,7 +57,12 @@ query AllMealsQuery {
     meal_time
     foods {
       name
+      category
+      amount_g
       calories
+      protein
+      carbs
+      fat
     }
   }
 }`

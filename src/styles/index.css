@@ -1,13 +1,16 @@
 @import "meals/meals.css";
 @import "header/header.css";
+@import "home/home.css";
 
 body {
   display: flex;
   justify-content: center;
   font-family: 'Source Sans Pro', sans-serif;
-  max-width: 1080px;
+  /* max-width: 1080px; */
   min-width: 500px;
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 #root {
@@ -19,5 +22,11 @@ body {
 .app {
   width: 100%;
   /* display: flex; */
+  justify-content: center;
+}
+
+.main-body {
+  margin-top: 10px;
+  display: flex;
   justify-content: center;
 }

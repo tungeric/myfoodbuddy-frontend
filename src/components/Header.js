@@ -8,9 +8,11 @@ class Header extends Component {
     return (
       <div className='header'>
         <div className='header-text'>
-          <div className='header-logo'>MyFoodBuddy</div>
+          <Link to='/' className='header-link-container'>
+            <div className='header-logo'>myfoodbuddy</div>
+        </Link>
           <div className='header-right'>
-            <Link to='/' className='header-link-container'>
+            <Link to='/meals' className='header-link-container'>
               <div className = 'header-link'>Track Meals</div>
             </Link>
             <Link to='/create' className='header-link-container'>

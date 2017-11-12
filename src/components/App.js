@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Header from './Header'
+import Home from './Home'
 import MealIndex from './Meals/MealIndex'
 import CreateFood from './Foods/CreateFood'
 
@@ -12,7 +13,8 @@ class App extends Component {
         <Header />
         <div className='ph3 pv1 background-gray'>
           <Switch>
-            <Route exact path='/' component={MealIndex} />
+            <Route exact path='/' component={Home} />
+            <Route exact path='/meals' component={MealIndex} />
             <Route exact path='/create' component={CreateFood} />
           </Switch>
         </div>
