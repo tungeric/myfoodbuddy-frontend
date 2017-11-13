@@ -14,19 +14,35 @@ class Meal extends Component {
     let foods = this.props.meal.foods;
     if(foods && foods.length > 0) {
       return (
-        <div>
+        <div className="food-list">
           {foods.map((food, idx) => <MealFoodItem key="food.id" food={food} index={idx} />)}
+          (Add food)
+        </div>
+      )
+    } else {
+      return (
+        <div className="food-list">
+          No food logged for {this.props.meal.name}!
+          (Add food)
         </div>
       )
     }
   }
+
+  pad(num) {
+    return (num < 10) ? '0' + num.toString() : num.toString();
+  }
   
   render() {
-    let formattedDate = moment(this.props.meal.meal_time, 'H:mm').format('LT')
-    console.log(this.props.meal)
+    let mealTime = this.props.meal.meal_time_since_epoch;
+    let date = new Date()
+    date.setUTCSeconds(mealTime)
+    let hours = date.getHours()
+    let minutes = this.pad(date.getMinutes())
+    let ampm = hours > 12 ? 'PM' : 'AM'
     return (
       <div className="meal-list-table">
-        <div className="meal-header">{formattedDate}: {this.props.meal.name}</div>
+        <div className="meal-header">{hours%12}:{minutes} {ampm} - {this.props.meal.name}</div>
         { this.renderMealFoods() }
       </div>
     );
