@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withApollo } from 'react-apollo'
 import gql from 'graphql-tag'
+import CreateMealFood from './CreateMealFood';
 
 class AddFoodToMealForm extends Component {
   constructor() {
@@ -79,8 +80,7 @@ class AddFoodToMealForm extends Component {
     }
   }
   render() {
-    console.log(this.state.selectedFood)
-    console.log(this.props.meal.id)
+    console.log
     return(
       <div>
         <div className="add-food-header">Add Food</div>
@@ -95,6 +95,7 @@ class AddFoodToMealForm extends Component {
           </div>
         </div>
         { this.renderSearch() }
+        <CreateMealFood mealId={this.props.meal.id} foodId={this.state.selectedFood}/>
       </div>
     )
   }

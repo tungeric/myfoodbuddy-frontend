@@ -5,112 +5,62 @@ import gql from 'graphql-tag'
 class CreateMealFood extends Component {
 
   state = {
-    food_id: this.props.food_id,
-    meal_id: this.props.meal_id,
-    num_servings: 1
+    foodId: this.props.foodId,
+    mealId: this.props.mealId,
+    numServings: 1
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.foodId !== this.state.foodId || nextProps.mealId !== this.state.mealId) {
+      this.setState({
+        foodId: nextProps.foodId,
+        mealId: nextProps.mealId
+      })
+    }
   }
 
   render() {
-    return (
-      <div>
-        <div className='flex flex-column mt3'>
-          <input
-            className='mb2'
-            value={this.state.name}
-            onChange={(e) => this.setState({ name: e.target.value })}
-            type='text'
-            placeholder='Food name'
-          />
-          <input
-            className='mb2'
-            value={this.state.category}
-            onChange={(e) => this.setState({ category: e.target.value })}
-            type='text'
-            placeholder='Category'
-          />
-          <input
-            className='mb2'
-            value={this.state.amount_g}
-            onChange={(e) => this.setState({ amount_g: e.target.value })}
-            type='number'
-            placeholder='Food amount (g)'
-          />
-          <input
-            className='mb2'
-            value={this.state.calories}
-            onChange={(e) => this.setState({ calories: e.target.value })}
-            type='number'
-            placeholder='Calories (kCal)'
-          />
-          <input
-            className='mb2'
-            value={this.state.protein}
-            onChange={(e) => this.setState({ protein: e.target.value })}
-            type='number'
-            placeholder='Protein (g)'
-          />
-          <input
-            className='mb2'
-            value={this.state.carbs}
-            onChange={(e) => this.setState({ carbs: e.target.value })}
-            type='number'
-            placeholder='Carbs (g)'
-          />
-          <input
-            className='mb2'
-            value={this.state.fat}
-            onChange={(e) => this.setState({ fat: e.target.value })}
-            type='number'
-            placeholder='Fat (g)'
-          />
+    console.log(this.state.foodId !== null && this.state.mealId !== null)
+    if(this.state.foodId !== null && this.state.mealId !== null) {
+      return (
+        <div className="create-meal-food-btn"
+            onClick={() => this._createMealFood()}>
+            Add
         </div>
-        <button
-          onClick={() => this._createFood()}
-        >
-          Submit
-        </button>
-      </div>
-    )
+      ) 
+    } else {
+      return (
+        <div></div>
+      )
+    }
   }
 
-  _createFood = async () => {
-    const { name, category, amount_g, calories, protein, carbs, fat } = this.state
-    await this.props.createFoodMutation({
+  _createMealFood = async () => {
+    const foodId = parseInt(this.state.foodId)
+    const mealId = parseInt(this.state.mealId)
+    const numServings = this.state.numServings
+    await this.props.createMealFoodMutation({
       variables: {
-        name,
-        category,
-        amount_g,
-        calories,
-        protein,
-        carbs,
-        fat
+        foodId,
+        mealId,
+        numServings
       }
     })
   }
-
 }
 
-const CREATE_FOOD_MUTATION = gql`
-  mutation CreateFoodMutation($name: String!, $category: String, $amount_g: Int!, $calories: Int, $protein: Int, $carbs: Int, $fat: Int) {
-  createFood (
-    name: $name
-    category: $category
-    amount_g: $amount_g
-    calories: $calories
-    protein: $protein
-    carbs: $carbs
-    fat: $fat
+const CREATE_MEAL_FOOD_MUTATION = gql`
+  mutation CreateMealFoodMutation($foodId: Int!, $mealId: Int!, $numServings: Int!) {
+  createMealFood (
+    food_id: $foodId
+    meal_id: $mealId
+    num_servings: $numServings
   ) {
-    id
-    name
-    category
-    amount_g
-    calories
-    protein
-    carbs
-    fat
+    food_id
+    meal_id
+    num_servings
   }
 }
 `
 
-export default graphql(CREATE_FOOD_MUTATION, { name: 'createFoodMutation' })(CreateFood)
+export default graphql(CREATE_MEAL_FOOD_MUTATION, { name: 'createMealFoodMutation' })(CreateMealFood)
