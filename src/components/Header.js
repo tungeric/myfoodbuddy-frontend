@@ -10,9 +10,9 @@ class Header extends Component {
         <div className='header-text'>
           <Link to='/' className='header-link-container'>
             <div className='header-logo'>myfoodbuddy</div>
-        </Link>
+          </Link>
           <div className='header-right'>
-            <Link to='/meals' className='header-link-container'>
+            <Link to='/test' className='header-link-container'>
               <div className = 'header-link'>Track Meals</div>
             </Link>
             <Link to='/create' className='header-link-container'>

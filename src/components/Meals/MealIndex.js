@@ -5,26 +5,24 @@ import gql from 'graphql-tag'
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import Meal from './Meal'
 
 class MealIndex extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: moment()
+      date: moment()
     };
     this.handleDateChange = this.handleDateChange.bind(this);
   }
 
   handleDateChange(date) {
     this.setState({
-      startDate: date
+      date: date
     });
   }
 
   render() {
-
     if(this.props.allMealsQuery && this.props.allMealsQuery.loading) {
       return <div>Loading</div>
     }
@@ -33,12 +31,19 @@ class MealIndex extends Component {
       return <div>Error</div>
     }
 
+    // console.log(this.state.date.unix()*1000) // gets you time since epoch
+    // console.log(this.state.date.format("M/D/YYYY H:mm")) // gets you date in that format
+    let date = this.state.date.format('M/D/YYYY')
+    let dayStart = moment(date + "0:00", "M/D/YYYY H:mm").valueOf();
+    let dayEnd = moment(date + "23:59", "M/D/YYYY H:mm").valueOf();
+    let dayStartSinceEpoch = moment(dayStart).unix()*1000;
+    let dayEndSinceEpoch = moment(dayEnd).unix()*1000;
     const mealsToRender = this.props.allMealsQuery.allMeals
-
+    
     return (
       <div className="main-body">
         <DatePicker className="calendar"
-                    selected = {this.state.startDate}
+                    selected = {this.state.date}
                     onChange={this.handleDateChange}/>
         <div>
           {mealsToRender.map(meal => (
@@ -55,6 +60,7 @@ query AllMealsQuery {
   allMeals {
     name
     meal_time
+    meal_time_since_epoch
     foods {
       name
       category
