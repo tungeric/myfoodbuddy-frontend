@@ -24,6 +24,7 @@ class DayMealsIndex extends Component {
     this.handleDateChange = this.handleDateChange.bind(this);
     this._updateDate = this._updateDate.bind(this);
     this.calculateTotals = this.calculateTotals.bind(this);
+    this.getMealsData = this.getMealsData.bind(this);
   }
 
   handleDateChange(date) {
@@ -36,16 +37,24 @@ class DayMealsIndex extends Component {
     let dayEndValue = moment(formattedDate + "23:59", "M/D/YYYY H:mm").valueOf();
     let dayStart = moment(dayStartValue).unix() * 1000;
     let dayEnd = moment(dayEndValue).unix() * 1000;
-    this.setState({
+    const a = await this.setState({
       date: date,
       dayStart: dayStart,
       dayEnd: dayEnd
     });
+    this.getMealsData()
+  }
+
+  getMealsData = async () => {
+    let dayStart = this.state.dayStart+1-1
+    let dayEnd = this.state.dayEnd
+    const clearCache = await this.props.client.resetStore()
     const result = await this.props.client.query({
       query: ALL_DAY_MEALS_QUERY,
       variables: { dayStart, dayEnd }
     })
     const meals = result.data.allDayMeals
+    console.log("MEALS:", meals)
     this.setState({ meals })
     this.calculateTotals(meals)
   }
@@ -77,7 +86,7 @@ class DayMealsIndex extends Component {
     if(this.state.meals.length > 0) {
       return (
         <div>
-          { this.state.meals.map((meal, idx) => <Meal key="meal.id" meal={meal} index={idx} />) }
+          { this.state.meals.map((meal, idx) => <Meal getMealsData={this.getMealsData} key="meal.id" meal={meal} index={idx} />) }
         </div>
       )
     } else {

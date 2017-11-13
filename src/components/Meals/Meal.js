@@ -54,6 +54,7 @@ class Meal extends Component {
 
   closeModal() {
     this.setState({ modalIsOpen: false });
+    this.props.getMealsData();
   }
 
   renderAddFoodModal() {
