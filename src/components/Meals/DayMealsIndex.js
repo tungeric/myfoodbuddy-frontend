@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import FontAwesome from 'react-fontawesome';
 
 import Meal from './Meal'
 
@@ -75,7 +76,7 @@ class DayMealsIndex extends Component {
       )
     } else {
       return (
-        <div className="food-list">
+        <div className="no-meals">
           No meals recorded today!
         </div>
       )
@@ -112,6 +113,7 @@ class DayMealsIndex extends Component {
           </div>
           <div className="meal-list-content">
             { this.renderMealList() }
+            <div className="add-meal"><FontAwesome name="cutlery"/> Add Meal</div>
           </div>
         </div>
       </div>

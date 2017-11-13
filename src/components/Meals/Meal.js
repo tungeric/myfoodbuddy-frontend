@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
-import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import FontAwesome from 'react-fontawesome';
+
 
 import MealFoodItem from './MealFoodItem';
 
@@ -42,15 +43,16 @@ class Meal extends Component {
       return (
         <div className="food-list">
           {foods.map((food, idx) => <MealFoodItem key="food.id" food={food} index={idx} />)}
-          (Add food)
+          <div className="add-food"><FontAwesome name="plus-circle"/> Add Food</div>
         </div>
       )
     } else {
       return (
         <div className="food-list">
-          No food logged for {this.props.meal.name}!
-          (Add food)
+          <div>No food logged for {this.props.meal.name}!</div>
+          <div className="add-food"><FontAwesome name="plus-circle" /> Add Food</div>
         </div>
+        
       )
     }
   }
@@ -72,7 +74,6 @@ class Meal extends Component {
   }
 
   renderMealNutritionTotals() {
-    console.log(this.state.mealCalories)
     return (
       <div className="meal-nutrition-totals">
         <div className="meal-nutrition-totals-name">Meal Total:</div>
