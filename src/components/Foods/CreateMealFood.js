@@ -45,6 +45,7 @@ class CreateMealFood extends Component {
         numServings
       }
     })
+    this.props.closeModal()
   }
 }
 

@@ -74,7 +74,7 @@ class AddFoodToMealForm extends Component {
           <div className="food-search-results">
             { this.renderSearchResults() }
           </div>
-          <CreateMealFood mealId={this.props.meal.id} foodId={this.state.selectedFood} />
+          <CreateMealFood closeModal={this.props.closeModal} mealId={this.props.meal.id} foodId={this.state.selectedFood} />
         </div>
       )
     } else {
