@@ -53,7 +53,6 @@ class AddFoodToMealForm extends Component {
   }
 
   renderSearchResults() {
-
     return(
       <form>
         <select size={this.state.foods.length} value={this.state.selectedFood} onChange={this.handleFoodSelection}>
@@ -80,8 +79,8 @@ class AddFoodToMealForm extends Component {
     }
   }
   render() {
-    console.log(this.state.foods)
-    console.log(this.props)
+    console.log(this.state.selectedFood)
+    console.log(this.props.meal.id)
     return(
       <div>
         <div className="add-food-header">Add Food</div>

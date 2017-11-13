@@ -50,7 +50,13 @@ class DayMealsIndex extends Component {
     this.calculateTotals(meals)
   }
 
-  calculateTotals(meals) {
+  calculateTotals = async(meals) => {
+    const a = await this.setState({
+      totalCalories: 0,
+      totalProtein: 0,
+      totalCarbs: 0,
+      totalFat: 0
+    })
     meals.forEach((meal) => {
       meal.foods.forEach((food) => {
         this.setState({
