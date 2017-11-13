@@ -14,10 +14,15 @@ class DayMealsIndex extends Component {
       meals: [],
       date: moment(),
       dayStart: 0,
-      dayEnd: 0
+      dayEnd: 0,
+      totalCalories: 0,
+      totalProtein: 0,
+      totalCarbs: 0,
+      totalFat: 0
     }
     this.handleDateChange = this.handleDateChange.bind(this);
     this._updateDate = this._updateDate.bind(this);
+    this.calculateTotals = this.calculateTotals.bind(this);
   }
 
   handleDateChange(date) {
@@ -41,6 +46,21 @@ class DayMealsIndex extends Component {
     })
     const meals = result.data.allDayMeals
     this.setState({ meals })
+    this.calculateTotals(meals)
+  }
+
+  calculateTotals(meals) {
+    console.log(meals)
+    meals.forEach((meal) => {
+      meal.foods.forEach((food) => {
+        this.setState({
+          totalCalories: this.state.totalCalories + food.calories,
+          totalProtein: this.state.totalProtein + food.protein,
+          totalCarbs: this.state.totalCarbs + food.carbs,
+          totalFat: this.state.totalFat + food.fat,
+        })
+      })
+    })
   }
 
   componentDidMount() {
@@ -56,25 +76,39 @@ class DayMealsIndex extends Component {
       )
     } else {
       return (
-        <div>
+        <div className="food-list">
           No meals recorded today!
         </div>
       )
     }
   }
 
+  renderNutritionTotals() {
+    return (
+      <div className="meal-nutrition-totals">
+        <div className="meal-nutrition-totals-date">On {this.state.date.format('dddd')}, {this.state.date.format('LL')}, you ate:</div>
+        <div className="meal-nutrition-totals-cal">{this.state.totalCalories} calories</div>
+        <div className="meal-nutrition-totals-pro">{this.state.totalProtein} g of protein</div>
+        <div className="meal-nutrition-totals-car">{this.state.totalCarbs} g of carbohydrates</div>
+        <div className="meal-nutrition-totals-fat">{this.state.totalFat} g of fat</div>
+      </div>
+    )
+  }
   render () {
     return (
       <div className="meal-main-body">
         <div className="meal-left">
-          <div className="meal-greeting">Track your meals on:</div>
-          <DatePicker className="calendar"
-            selected={this.state.date}
-            onChange={this.handleDateChange} />
+          <div className="meal-date-select">
+            <div className="meal-greeting">Track your meals on:</div>
+            <DatePicker className="calendar"
+              selected={this.state.date}
+              onChange={this.handleDateChange} />
+          </div>
+          { this.renderNutritionTotals() }
         </div>
         <div className="meal-right">
           <div className="meal-list-header">
-            Here's what you ate today
+            Here's what you ate on {this.state.date.format('LL')}
           </div>
           <div className="meal-list-content">
             { this.renderMealList() }

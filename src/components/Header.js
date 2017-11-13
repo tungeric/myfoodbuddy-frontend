@@ -12,7 +12,7 @@ class Header extends Component {
             <div className='header-logo'>myfoodbuddy</div>
           </Link>
           <div className='header-right'>
-            <Link to='/test' className='header-link-container'>
+            <Link to='/meals' className='header-link-container'>
               <div className = 'header-link'>Track Meals</div>
             </Link>
             <Link to='/create' className='header-link-container'>
