@@ -1,6 +1,7 @@
 @import "meals/meals.css";
 @import "header/header.css";
 @import "home/home.css";
+@import "forms/forms.css";
 
 body {
   display: flex;

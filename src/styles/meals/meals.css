@@ -175,6 +175,7 @@
 
 .add-food:hover {
   font-size: 17px;
+  cursor: pointer;
 }
 
 .no-meals {

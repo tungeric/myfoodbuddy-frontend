@@ -1,0 +1,138 @@
+.add-food-header {
+  color: rgb(200,0,0);
+  font-weight: bolder;
+}
+
+.add-food-category-select {
+  width: 100%;
+}
+
+.add-food-category-select-title {
+  text-align: center;
+}
+
+.add-food-category-options {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px;
+}
+
+.food-category-meat {
+  background-image: url("http://res.cloudinary.com/dfafbqoxx/image/upload/v1510598812/steak-2272464_640_wxrdfj.jpg");
+  background-size: 150%;
+  background-position: 0% 8%;
+  width: 150px;
+  height: 150px;
+  border: 1px solid gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bolder;
+  font-size: 25px;
+  transition: all .4s;
+  -webkit-filter: brightness(90%);
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.food-category-meat:hover {
+  -webkit-filter: brightness(120%);
+}
+
+.food-category-veg {
+  background-image: url("http://res.cloudinary.com/dfafbqoxx/image/upload/v1510510307/banner-fsn_brx4kg.jpg");
+  background-size: 250%;
+  background-position: 85% 0%;
+  width: 150px;
+  height: 150px;
+  border: 1px solid gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bolder;
+  font-size: 25px;
+  transition: all .4s;
+  -webkit-filter: brightness(90%);
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.food-category-veg:hover {
+  -webkit-filter: brightness(120%);
+}
+
+.food-category-fruit {
+  background-image: url("http://res.cloudinary.com/dfafbqoxx/image/upload/v1510598812/raspberry-2919037_640_ej7uwv.jpg");
+  background-size: 250%;
+  background-position: 60% 0%;
+  width: 150px;
+  height: 150px;
+  border: 1px solid gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bolder;
+  font-size: 25px;
+  transition: all .4s;
+  -webkit-filter: brightness(90%);
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.food-category-fruit:hover {
+  -webkit-filter: brightness(120%);
+}
+
+.food-category-grain {
+  background-image: url("http://res.cloudinary.com/dfafbqoxx/image/upload/v1510598812/bread-1761197_640_mqtcqp.jpg");
+  background-size: 150%;
+  background-position: 20% 0%;
+  width: 150px;
+  height: 150px;
+  border: 1px solid gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bolder;
+  font-size: 25px;
+  transition: all .4s;
+  -webkit-filter: brightness(90%);
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.food-category-grain:hover {
+  -webkit-filter: brightness(120%);
+}
+
+.food-category-misc {
+  background-image: url("http://res.cloudinary.com/dfafbqoxx/image/upload/v1510598812/ice-cream-cone-1274894_640_cmbszb.jpg");
+  background-size: 220%;
+  background-position: 35% 65%;
+  width: 150px;
+  height: 150px;
+  border: 1px solid gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bolder;
+  font-size: 25px;
+  transition: all .4s;
+  -webkit-filter: brightness(90%);
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.food-category-misc:hover {
+  -webkit-filter: brightness(120%);
+}
+
+.hidden-radio-btn {
+  visibility: hidden;
+  position: absolute;
+}

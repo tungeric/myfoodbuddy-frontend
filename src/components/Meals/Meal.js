@@ -2,20 +2,25 @@ import React, { Component } from 'react'
 
 import moment from 'moment';
 import FontAwesome from 'react-fontawesome';
-
-
+import Modal from 'react-modal';
+import AddFoodToMealForm from '../Foods/AddFoodToMealForm';
 import MealFoodItem from './MealFoodItem';
 
 class Meal extends Component {
   constructor() {
     super()
     this.state= {
+      modalIsOpen: false,
       mealCalories: 0,
       mealProtein: 0,
       mealCarbs: 0,
       mealFat: 0,
     }
     this.calculateMealTotals = this.calculateMealTotals.bind(this)
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.renderAddFoodModal = this.renderAddFoodModal.bind(this);
   }
 
   componentDidMount() {
@@ -30,11 +35,39 @@ class Meal extends Component {
 
   componentWillUnmount() {
       this.setState({
-      mealCalories: 0,
-      mealProtein: 0,
-      mealCarbs: 0,
-      mealFat: 0
+        modalIsOpen: false,
+        mealCalories: 0,
+        mealProtein: 0,
+        mealCarbs: 0,
+        mealFat: 0
     })
+  }
+
+  openModal() {
+    this.setState({ modalIsOpen: true });
+  }
+
+  afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // this.subtitle.style.color = '#f00';
+  }
+
+  closeModal() {
+    this.setState({ modalIsOpen: false });
+  }
+
+  renderAddFoodModal() {
+    return (
+      <Modal
+        isOpen={this.state.modalIsOpen}
+        onAfterOpen={this.afterOpenModal}
+        onRequestClose={this.closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <AddFoodToMealForm /> 
+      </Modal>
+    )
   }
 
   renderMealFoods() {
@@ -43,14 +76,19 @@ class Meal extends Component {
       return (
         <div className="food-list">
           {foods.map((food, idx) => <MealFoodItem key="food.id" food={food} index={idx} />)}
-          <div className="add-food"><FontAwesome name="plus-circle"/> Add Food</div>
+          <div className="add-food" onClick={this.openModal}>
+            <FontAwesome name="plus-circle"/> Add Food
+          </div>
+          { this.renderAddFoodModal() }
         </div>
       )
     } else {
       return (
         <div className="food-list">
           <div>No food logged for {this.props.meal.name}!</div>
-          <div className="add-food"><FontAwesome name="plus-circle" /> Add Food</div>
+          <div className="add-food">
+            <FontAwesome name="plus-circle" /> Add Food
+          </div>
         </div>
         
       )
@@ -112,5 +150,16 @@ class Meal extends Component {
   }
 
 }
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+};
 
 export default Meal;
