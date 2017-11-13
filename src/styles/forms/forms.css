@@ -205,3 +205,24 @@
   width: 400px;
   font-size: 16px;
 }
+
+.create-meal-btn {
+  padding-top: 20px;
+  color: white;
+  font-weight: bolder;
+  padding: 10px;
+  background-color: rgb(200,0,0);
+  border-radius: 12px;
+  transition: all .4s;
+  width: 100px;
+  text-align: center;
+}
+
+.create-meal-btn:hover {
+  cursor: pointer;
+  -webkit-filter: brightness(130%);
+}
+
+.add-meal-type-input {
+  font-size: 16px;
+}

@@ -53,7 +53,7 @@ class AddMealForm extends Component {
       <div className="add-meal-form-container">
         <div className="add-meal-form-header">Add Meal</div>
         <form className="add-meal-form">
-          <select value={this.state.selectedFood} onChange={this.handleMealTypeSelection}>
+          <select className="add-meal-type-input" value={this.state.selectedFood} onChange={this.handleMealTypeSelection}>
             <option value="" selected disabled>Choose a Meal Type</option>
             <option value="Breakfast">Breakfast</option>
             <option value="Brunch">Brunch</option>
@@ -61,6 +61,7 @@ class AddMealForm extends Component {
             <option value="Snack">Snack</option>
             <option value="Dinner">Dinner</option>
           </select>
+          <br/>
           <DatePicker className="add-meals-calendar"
                       selected={this.state.date} 
                       onChange={this.handleDateChange} 
@@ -68,10 +69,13 @@ class AddMealForm extends Component {
                       timeFormat="H:mm"
                       timeIntervals={15}
                       dateFormat="LLLL" />
+          <br /><br /><br /><br /><br />
+          <br /><br /><br /><br /><br />
+          <br /><br /><br /><br />
+          <CreateMeal closeModal={this.props.closeModal}
+            name={this.state.selectedMealType}
+            mealTime={this.state.date.unix()}/>
         </form>
-        <CreateMeal closeModal={this.props.closeModal}
-          name={this.state.selectedMealType}
-          mealTime={this.state.date.unix()}/>
       </div>
     )
   }

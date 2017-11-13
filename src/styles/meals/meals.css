@@ -24,6 +24,62 @@
 .nutrition-totals {
   padding-top: 20px;
   font-size: 20px;
+  color: white;
+  box-sizing: border-box;
+}
+
+.nutrition-totals-cal {
+  width: 90%;
+  height: 50px;
+  margin: 10px;
+  padding: 5px;
+  background: linear-gradient(to bottom right, red, yellow);
+  transition: all .4s;
+}
+
+.nutrition-totals-cal:hover {
+  font-size: 36px;
+  padding: 10px;
+}
+
+.nutrition-totals-pro {
+  width: 90%;
+  height: 50px;
+  padding: 5px;
+  background: linear-gradient(to bottom right, blue, purple);
+  transition: all .4s;
+}
+
+.nutrition-totals-pro:hover {
+  font-size: 36px;
+  padding: 10px;
+}
+
+.nutrition-totals-car {
+  width: 90%;
+  height: 50px;
+  margin: 10px;
+  padding: 5px;
+  background: linear-gradient(to bottom right, green, yellow);
+  transition: all .4s;
+}
+
+.nutrition-totals-car:hover {
+  font-size: 36px;
+  padding: 10px;
+}
+
+.nutrition-totals-fat {
+  width: 90%;
+  height: 50px;
+  padding: 5px;
+  background: linear-gradient(to bottom right, purple, red);
+  transition: all .4s;
+}
+
+.nutrition-totals-fat:hover {
+  font-size: 36px;
+  padding: 10px;
 }
 
 .meal-nutrition-totals {
@@ -179,7 +235,7 @@
 }
 
 .no-meals {
-  padding: 10px;
+  padding: 5px;
 }
 
 .add-meal {
@@ -188,7 +244,8 @@
   padding-top: 10px;
   font-weight: bolder;
   transition: all .4s;
-  padding: 10px;
+  padding: 5px;
+  cursor: pointer;
 }
 
 .add-meal:hover {
