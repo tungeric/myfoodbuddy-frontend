@@ -18,33 +18,25 @@ class DayMealsIndex extends Component {
     }
     this.handleDateChange = this.handleDateChange.bind(this);
     this._updateDate = this._updateDate.bind(this);
-    this._executeSearch = this._executeSearch.bind(this);
+    // this._executeSearch = this._executeSearch.bind(this);
   }
 
   handleDateChange(date) {
     this._updateDate(date)
-    this._executeSearch()
+    // this._executeSearch()
   }
 
-  _updateDate(date) {
+  _updateDate = async (date) => {
     let formattedDate = date.format('M/D/YYYY')
-    let dayStart = moment(formattedDate + "0:00", "M/D/YYYY H:mm").valueOf();
-    let dayEnd = moment(formattedDate + "23:59", "M/D/YYYY H:mm").valueOf();
-    let dayStartSinceEpoch = moment(dayStart).unix() * 1000;
-    let dayEndSinceEpoch = moment(dayEnd).unix() * 1000;
+    let dayStartValue = moment(formattedDate + "0:00", "M/D/YYYY H:mm").valueOf();
+    let dayEndValue = moment(formattedDate + "23:59", "M/D/YYYY H:mm").valueOf();
+    let dayStart = moment(dayStartValue).unix() * 1000;
+    let dayEnd = moment(dayEndValue).unix() * 1000;
     this.setState({
       date: date,
-      dayStart: dayStartSinceEpoch,
-      dayEnd: dayEndSinceEpoch
+      dayStart: dayStart,
+      dayEnd: dayEnd
     });
-  }
-
-  _executeSearch = async () => {
-    const dayStart = this.state.dayStart
-    const dayEnd = this.state.dayEnd
-    console.log(dayStart)
-    console.log(dayEnd)
-    console.log("PROPS: ",this.props)
     const result = await this.props.client.query({
       query: ALL_DAY_MEALS_QUERY,
       variables: { dayStart, dayEnd }
@@ -54,9 +46,24 @@ class DayMealsIndex extends Component {
     this.setState({ meals })
   }
 
+  // _executeSearch = async () => {
+  //   const dayStart = this.state.dayStart
+  //   const dayEnd = this.state.dayEnd
+  //   console.log(dayStart)
+  //   console.log(dayEnd)
+  //   console.log("PROPS: ",this.props)
+  //   const result = await this.props.client.query({
+  //     query: ALL_DAY_MEALS_QUERY,
+  //     variables: { dayStart, dayEnd }
+  //   })
+  //   console.log("RESULT: ", result)
+  //   const meals = result.data.allDayMeals
+  //   this.setState({ meals })
+  // }
+
   componentDidMount() {
     this.handleDateChange(moment());
-    this._executeSearch()
+    // this._executeSearch()
   }
 
   render () {
