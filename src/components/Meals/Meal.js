@@ -87,9 +87,10 @@ class Meal extends Component {
       return (
         <div className="food-list">
           <div>No food logged for {this.props.meal.name}!</div>
-          <div className="add-food">
+          <div className="add-food" onClick={this.openModal}>
             <FontAwesome name="plus-circle" /> Add Food
           </div>
+          { this.renderAddFoodModal() }
         </div>
         
       )
