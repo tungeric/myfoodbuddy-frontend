@@ -21,9 +21,41 @@
   padding-right: 10px;
 }
 
-.meal-nutrition-totals {
+.nutrition-totals {
   padding-top: 20px;
   font-size: 20px;
+}
+
+.meal-nutrition-totals {
+  border-top: 1px solid gray;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-bottom: 5px;
+}
+
+.meal-nutrition-totals-name {
+  width: 22%;
+}
+.meal-nutrition-totals-cat {
+  width: 12%;
+  text-align: center;
+}
+.meal-nutrition-totals-cals {
+  width: 14%;
+  text-align: center;
+}
+.meal-nutrition-totals-pro {
+  width: 12%;
+  text-align: center;
+}
+.meal-nutrition-totals-car {
+  width: 12%;
+  text-align: center;
+}
+.meal-nutrition-totals-fat {
+  width: 12%;
+  text-align: center;
 }
 
 .meal-greeting {

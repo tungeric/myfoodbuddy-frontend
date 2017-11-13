@@ -8,6 +8,32 @@ import MealFoodItem from './MealFoodItem';
 class Meal extends Component {
   constructor() {
     super()
+    this.state= {
+      mealCalories: 0,
+      mealProtein: 0,
+      mealCarbs: 0,
+      mealFat: 0,
+    }
+    this.calculateMealTotals = this.calculateMealTotals.bind(this)
+  }
+
+  componentDidMount() {
+    this.setState({
+      mealCalories: 0,
+      mealProtein: 0,
+      mealCarbs: 0,
+      mealFat: 0
+    })
+    this.calculateMealTotals()
+  }
+
+  componentWillUnmount() {
+      this.setState({
+      mealCalories: 0,
+      mealProtein: 0,
+      mealCarbs: 0,
+      mealFat: 0
+    })
   }
 
   renderMealFoods() {
@@ -29,8 +55,34 @@ class Meal extends Component {
     }
   }
 
+  calculateMealTotals() {
+    let meal = this.props.meal
+    meal.foods.forEach(async (food) => {
+      this.setState((prevState, props) => ({
+        mealCalories: prevState.mealCalories + food.calories,
+        mealProtein: prevState.mealProtein + food.protein,
+        mealCarbs: prevState.mealCarbs + food.carbs,
+        mealFat: prevState.mealFat + food.fat,
+      }))
+    })
+  }
+
   pad(num) {
     return (num < 10) ? '0' + num.toString() : num.toString();
+  }
+
+  renderMealNutritionTotals() {
+    console.log(this.state.mealCalories)
+    return (
+      <div className="meal-nutrition-totals">
+        <div className="meal-nutrition-totals-name">Meal Total:</div>
+        <div className="meal-nutrition-totals-cat"></div>
+        <div className="meal-nutrition-totals-cals">{this.state.mealCalories}</div>
+        <div className="meal-nutrition-totals-pro">{this.state.mealProtein}</div>
+        <div className="meal-nutrition-totals-car">{this.state.mealCarbs}</div>
+        <div className="meal-nutrition-totals-fat">{this.state.mealFat}</div>
+      </div>
+    )
   }
   
   render() {
@@ -53,6 +105,7 @@ class Meal extends Component {
           <div className="meal-data-titles-fat">Fat (g)</div>
         </div>
         { this.renderMealFoods() }
+        { this.renderMealNutritionTotals() }
       </div>
     );
   }

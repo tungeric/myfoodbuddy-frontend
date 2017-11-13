@@ -50,7 +50,6 @@ class DayMealsIndex extends Component {
   }
 
   calculateTotals(meals) {
-    console.log(meals)
     meals.forEach((meal) => {
       meal.foods.forEach((food) => {
         this.setState({
@@ -85,15 +84,16 @@ class DayMealsIndex extends Component {
 
   renderNutritionTotals() {
     return (
-      <div className="meal-nutrition-totals">
-        <div className="meal-nutrition-totals-date">On {this.state.date.format('dddd')}, {this.state.date.format('LL')}, you ate:</div>
-        <div className="meal-nutrition-totals-cal">{this.state.totalCalories} calories</div>
-        <div className="meal-nutrition-totals-pro">{this.state.totalProtein} g of protein</div>
-        <div className="meal-nutrition-totals-car">{this.state.totalCarbs} g of carbohydrates</div>
-        <div className="meal-nutrition-totals-fat">{this.state.totalFat} g of fat</div>
+      <div className="nutrition-totals">
+        <div className="nutrition-totals-name"></div>
+        <div className="nutrition-totals-cal">{this.state.totalCalories} calories</div>
+        <div className="nutrition-totals-pro">{this.state.totalProtein} g of protein</div>
+        <div className="nutrition-totals-car">{this.state.totalCarbs} g of carbohydrates</div>
+        <div className="nutrition-totals-fat">{this.state.totalFat} g of fat</div>
       </div>
     )
   }
+
   render () {
     return (
       <div className="meal-main-body">
