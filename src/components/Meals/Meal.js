@@ -9,8 +9,8 @@ class Meal extends Component {
     let formattedDate = moment(this.props.meal.meal_time_since_epoch, 'M/D/YYYY H:mm')
 
     return (
-      <div>
-        <div>{this.props.meal.name}</div>
+      <div className="meal-list-table">
+        <div className="meal-header">{this.props.meal.name}</div>
       </div>
     );
   }

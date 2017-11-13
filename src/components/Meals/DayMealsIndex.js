@@ -18,12 +18,10 @@ class DayMealsIndex extends Component {
     }
     this.handleDateChange = this.handleDateChange.bind(this);
     this._updateDate = this._updateDate.bind(this);
-    // this._executeSearch = this._executeSearch.bind(this);
   }
 
   handleDateChange(date) {
     this._updateDate(date)
-    // this._executeSearch()
   }
 
   _updateDate = async (date) => {
@@ -46,34 +44,41 @@ class DayMealsIndex extends Component {
     this.setState({ meals })
   }
 
-  // _executeSearch = async () => {
-  //   const dayStart = this.state.dayStart
-  //   const dayEnd = this.state.dayEnd
-  //   console.log(dayStart)
-  //   console.log(dayEnd)
-  //   console.log("PROPS: ",this.props)
-  //   const result = await this.props.client.query({
-  //     query: ALL_DAY_MEALS_QUERY,
-  //     variables: { dayStart, dayEnd }
-  //   })
-  //   console.log("RESULT: ", result)
-  //   const meals = result.data.allDayMeals
-  //   this.setState({ meals })
-  // }
-
   componentDidMount() {
     this.handleDateChange(moment());
-    // this._executeSearch()
+  }
+
+  renderMealList() {
+    if(this.state.meals.length > 0) {
+      return (
+        <div>
+          { this.state.meals.map((meal, idx) => <Meal key="meal.id" meal={meal} index={idx} />) }
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          No meals recorded today!
+        </div>
+      )
+    }
   }
 
   render () {
     console.log("STATE: ",this.state)
     return (
-      <div className="main-body">
-        <DatePicker className="calendar"
-          selected={this.state.date}
-          onChange={this.handleDateChange} />
-        {this.state.meals.map((meal, idx) => <Meal key="meal.id" meal={meal} index={idx} />)}
+      <div className="meal-main-body">
+        <div className="meal-left">
+          <div className="meal-greeting">Track your meals on:</div>
+          <DatePicker className="calendar"
+            selected={this.state.date}
+            onChange={this.handleDateChange} />
+        </div>
+        <div className="meal-right">
+          <div className="meal-list-header">
+            { this.renderMealList() }
+          </div>
+        </div>
       </div>
     )
   }
