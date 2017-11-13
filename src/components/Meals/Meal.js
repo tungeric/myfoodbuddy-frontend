@@ -39,10 +39,11 @@ class Meal extends Component {
     date.setUTCSeconds(mealTime)
     let hours = date.getHours()
     let minutes = this.pad(date.getMinutes())
-    let ampm = hours > 12 ? 'PM' : 'AM'
+    let ampm = hours >= 12 && hours < 24 ? 'PM' : 'AM'
+    hours = hours%12 === 0 ? 12 : hours%12
     return (
       <div className="meal-list-table">
-        <div className="meal-header">{hours%12}:{minutes} {ampm} - {this.props.meal.name}</div>
+        <div className="meal-header">{hours}:{minutes} {ampm} - {this.props.meal.name}</div>
         { this.renderMealFoods() }
       </div>
     );
