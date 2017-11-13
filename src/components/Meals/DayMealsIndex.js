@@ -39,7 +39,6 @@ class DayMealsIndex extends Component {
       query: ALL_DAY_MEALS_QUERY,
       variables: { dayStart, dayEnd }
     })
-    console.log("RESULT: ", result)
     const meals = result.data.allDayMeals
     this.setState({ meals })
   }
@@ -65,7 +64,6 @@ class DayMealsIndex extends Component {
   }
 
   render () {
-    console.log("STATE: ",this.state)
     return (
       <div className="meal-main-body">
         <div className="meal-left">
@@ -76,6 +74,9 @@ class DayMealsIndex extends Component {
         </div>
         <div className="meal-right">
           <div className="meal-list-header">
+            Here's what you ate today
+          </div>
+          <div className="meal-list-content">
             { this.renderMealList() }
           </div>
         </div>
