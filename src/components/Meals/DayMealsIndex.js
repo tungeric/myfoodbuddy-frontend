@@ -6,7 +6,10 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import FontAwesome from 'react-fontawesome';
 
+import Modal from 'react-modal';
+
 import Meal from './Meal'
+import AddMealForm from './AddMealForm'
 
 class DayMealsIndex extends Component {
   constructor() {
@@ -19,12 +22,31 @@ class DayMealsIndex extends Component {
       totalCalories: 0,
       totalProtein: 0,
       totalCarbs: 0,
-      totalFat: 0
+      totalFat: 0,
+      modalIsOpen: false
     }
     this.handleDateChange = this.handleDateChange.bind(this);
     this._updateDate = this._updateDate.bind(this);
     this.calculateTotals = this.calculateTotals.bind(this);
     this.getMealsData = this.getMealsData.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.renderAddMealModal = this.renderAddMealModal.bind(this);
+  }
+
+  openModal() {
+    this.setState({ modalIsOpen: true });
+  }
+
+  afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // this.subtitle.style.color = '#f00';
+  }
+
+  closeModal() {
+    this.setState({ modalIsOpen: false });
+    this.getMealsData();
   }
 
   handleDateChange(date) {
@@ -110,6 +132,20 @@ class DayMealsIndex extends Component {
     )
   }
 
+  renderAddMealModal() {
+    return (
+      <Modal
+        isOpen={this.state.modalIsOpen}
+        onAfterOpen={this.afterOpenModal}
+        onRequestClose={this.closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <AddMealForm closeModal={this.closeModal} date={this.state.date}/>
+      </Modal>
+    )
+  }
+
   render () {
     return (
       <div className="meal-main-body">
@@ -128,7 +164,10 @@ class DayMealsIndex extends Component {
           </div>
           <div className="meal-list-content">
             { this.renderMealList() }
-            <div className="add-meal"><FontAwesome name="cutlery"/> Add Meal</div>
+            <div className="add-meal" onClick={this.openModal}>
+              <FontAwesome name="cutlery"/> Add Meal
+            </div>
+            { this.renderAddMealModal() }
           </div>
         </div>
       </div>
@@ -158,5 +197,16 @@ const ALL_DAY_MEALS_QUERY = gql`
     }
   }
 `
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+};
 
 export default withApollo(DayMealsIndex)

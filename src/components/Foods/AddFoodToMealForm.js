@@ -84,7 +84,6 @@ class AddFoodToMealForm extends Component {
     }
   }
   render() {
-    console.log
     return(
       <div className="add-food-container">
         <div className="add-food-header">Add Food</div>
