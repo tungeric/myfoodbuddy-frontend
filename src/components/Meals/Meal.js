@@ -44,6 +44,14 @@ class Meal extends Component {
     return (
       <div className="meal-list-table">
         <div className="meal-header">{hours}:{minutes} {ampm} - {this.props.meal.name}</div>
+        <div className="meal-data-title-bar">
+          <div className="meal-data-titles-name"></div>
+          <div className="meal-data-titles-cat">Category</div>
+          <div className="meal-data-titles-cals">Calories (kCal)</div>
+          <div className="meal-data-titles-pro">Protein (g)</div>
+          <div className="meal-data-titles-car">Carbs (g)</div>
+          <div className="meal-data-titles-fat">Fat (g)</div>
+        </div>
         { this.renderMealFoods() }
       </div>
     );

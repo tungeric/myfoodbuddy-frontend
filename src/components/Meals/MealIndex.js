@@ -61,6 +61,9 @@ query AllMealsQuery {
     name
     meal_time
     meal_time_since_epoch
+    meal_foods {
+      num_servings
+    }
     foods {
       name
       category
