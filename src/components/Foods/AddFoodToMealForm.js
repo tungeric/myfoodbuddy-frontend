@@ -56,7 +56,7 @@ class AddFoodToMealForm extends Component {
   renderSearchResults() {
     return(
       <form>
-        <select size={this.state.foods.length} value={this.state.selectedFood} onChange={this.handleFoodSelection}>
+        <select className="food-search-result-item" size={this.state.foods.length} value={this.state.selectedFood} onChange={this.handleFoodSelection}>
           {this.state.foods.map((food, idx) => <option value={food.id}>{food.name} ({food.amount_g}g)</option>)}
         </select>
       </form>
@@ -67,10 +67,14 @@ class AddFoodToMealForm extends Component {
     if(this.state.categoryIs !== '') {
       return (
         <div className="food-search">
-          <input type="text" onChange={this.handleSearchText} placeholder="Search..."/>
+          <input className="food-search-bar" 
+                 type="text" 
+                 onChange={this.handleSearchText} 
+                 placeholder="Search..."/>
           <div className="food-search-results">
             { this.renderSearchResults() }
           </div>
+          <CreateMealFood mealId={this.props.meal.id} foodId={this.state.selectedFood} />
         </div>
       )
     } else {
@@ -82,7 +86,7 @@ class AddFoodToMealForm extends Component {
   render() {
     console.log
     return(
-      <div>
+      <div className="add-food-container">
         <div className="add-food-header">Add Food</div>
         <div className="add-food-category-select">
           <div className="add-food-category-select-title">Choose a category</div>
@@ -95,7 +99,6 @@ class AddFoodToMealForm extends Component {
           </div>
         </div>
         { this.renderSearch() }
-        <CreateMealFood mealId={this.props.meal.id} foodId={this.state.selectedFood}/>
       </div>
     )
   }

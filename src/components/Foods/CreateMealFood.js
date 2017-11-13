@@ -20,7 +20,6 @@ class CreateMealFood extends Component {
   }
 
   render() {
-    console.log(this.state.foodId !== null && this.state.mealId !== null)
     if(this.state.foodId !== null && this.state.mealId !== null) {
       return (
         <div className="create-meal-food-btn"
