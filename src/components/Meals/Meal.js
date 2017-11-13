@@ -65,7 +65,7 @@ class Meal extends Component {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <AddFoodToMealForm /> 
+        <AddFoodToMealForm meal={this.props.meal}/> 
       </Modal>
     )
   }

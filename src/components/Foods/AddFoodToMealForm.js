@@ -9,11 +9,13 @@ class AddFoodToMealForm extends Component {
       foods: [],
       categoryIs: '',
       nameContains: '',
+      selectedFood: null
     }
     this.handleCategorySelect = this.handleCategorySelect.bind(this)
     this.handleSearchText = this.handleSearchText.bind(this)
     this.executeSearch = this.executeSearch.bind(this)
     this.renderSearch = this.renderSearch.bind(this)
+    this.renderSearchResults = this.renderSearchResults.bind(this)
   }
 
   componentDidMount() {
@@ -35,6 +37,11 @@ class AddFoodToMealForm extends Component {
     this.executeSearch()
   }
 
+  handleFoodSelection = async(e) => {
+    let selectedFood = e.target.value
+    const a = await this.setState({ selectedFood: selectedFood })
+  }
+
   executeSearch = async() => {
     const { categoryIs, nameContains } = this.state
     const result = await this.props.client.query({
@@ -45,11 +52,25 @@ class AddFoodToMealForm extends Component {
     this.setState({ foods })
   }
 
+  renderSearchResults() {
+
+    return(
+      <form>
+        <select size={this.state.foods.length} value={this.state.selectedFood} onChange={this.handleFoodSelection}>
+          {this.state.foods.map((food, idx) => <option value={food.id}>{food.name} ({food.amount_g}g)</option>)}
+        </select>
+      </form>
+    )
+  }
+
   renderSearch() {
     if(this.state.categoryIs !== '') {
       return (
-        <div className="search">
+        <div className="food-search">
           <input type="text" onChange={this.handleSearchText} placeholder="Search..."/>
+          <div className="food-search-results">
+            { this.renderSearchResults() }
+          </div>
         </div>
       )
     } else {
@@ -60,6 +81,7 @@ class AddFoodToMealForm extends Component {
   }
   render() {
     console.log(this.state.foods)
+    console.log(this.props)
     return(
       <div>
         <div className="add-food-header">Add Food</div>
@@ -82,6 +104,7 @@ class AddFoodToMealForm extends Component {
 const ALL_FOODS_SEARCH_QUERY = gql`
   query AllFoodSearchQuery($categoryIs: String, $nameContains: String) {
     foodSearch (filter: { category_is: $categoryIs, name_contains: $nameContains }) {
+      id
       name
       category
       amount_g

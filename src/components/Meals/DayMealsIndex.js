@@ -127,6 +127,7 @@ const ALL_DAY_MEALS_QUERY = gql`
       meal_time_after: $dayStart
       meal_time_before: $dayEnd
     }) {
+      id
       name
       meal_time
       meal_time_since_epoch
