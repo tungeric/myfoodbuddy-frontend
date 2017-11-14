@@ -7,17 +7,18 @@ class CreateFood extends Component {
   state = {
     name: '',
     category: '',
-    amount_g: 0,
-    calories: 0,
-    protein: 0,
-    carbs: 0,
-    fat: 0
+    amount_g: '',
+    calories: '',
+    protein: '',
+    carbs: '',
+    fat: ''
   }
 
   render() {
     return (
-      <div>
-        <div className='flex flex-column mt3'>
+      <div className="create-food-page">
+        <div className='create-food-form'>
+          <h1>Create Custom Food</h1>
           <input
             className='mb2'
             value={this.state.name}
@@ -25,13 +26,16 @@ class CreateFood extends Component {
             type='text'
             placeholder='Food name'
           />
-          <input
-            className='mb2'
-            value={this.state.category}
-            onChange={(e) => this.setState({ category: e.target.value })}
-            type='text'
-            placeholder='Category'
-          />
+          
+          <select className="mb2" name="category" 
+                  onChange={(e) => this.setState({ category: e.target.value })}>
+            <option value="" selected disabled>Choose a Category...</option>
+            <option value="Meat">Meat</option>
+            <option value="Vegetables">Vegetable</option>
+            <option value="Fruit">Fruit</option>
+            <option value="Grain">Grain</option>
+            <option value="Misc">Misc</option>
+          </select>
           <input
             className='mb2'
             value={this.state.amount_g}
@@ -67,18 +71,23 @@ class CreateFood extends Component {
             type='number'
             placeholder='Fat (g)'
           />
-        </div>
         <button
           onClick={() => this._createFood()}
         >
           Submit
         </button>
+        </div>
       </div>
     )
   }
 
   _createFood = async () => {
-    const { name, category, amount_g, calories, protein, carbs, fat } = this.state
+    let { name, category, amount_g, calories, protein, carbs, fat } = this.state
+    amount_g = parseInt(amount_g)
+    calories = parseInt(calories)
+    protein = parseInt(protein)
+    carbs = parseInt(carbs)
+    fat = parseInt(fat)
     await this.props.createFoodMutation({
       variables: {
         name,
@@ -90,6 +99,7 @@ class CreateFood extends Component {
         fat
       }
     })
+    this.props.history.push(`/meals`);
   }
 
 }
