@@ -1,3 +1,8 @@
+@keyframes fadein {
+    from { opacity: 0;}
+    to   { opacity: 1;}
+}
+
 .meal-main-body {
   margin-top: 10px;
   display: flex;
@@ -35,6 +40,7 @@
   padding: 5px;
   background: linear-gradient(to bottom right, red, yellow);
   transition: all .4s;
+  animation: fadein 1s;
 }
 
 .nutrition-totals-cal:hover {
@@ -48,6 +54,7 @@
   padding: 5px;
   background: linear-gradient(to bottom right, blue, purple);
   transition: all .4s;
+  animation: fadein 2s;
 }
 
 .nutrition-totals-pro:hover {
@@ -62,6 +69,7 @@
   padding: 5px;
   background: linear-gradient(to bottom right, green, yellow);
   transition: all .4s;
+  animation: fadein 3s;
 }
 
 .nutrition-totals-car:hover {
@@ -75,6 +83,7 @@
   padding: 5px;
   background: linear-gradient(to bottom right, purple, red);
   transition: all .4s;
+  animation: fadein 4s;
 }
 
 .nutrition-totals-fat:hover {

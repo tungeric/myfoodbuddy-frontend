@@ -1,3 +1,11 @@
+@keyframes fadein {
+    from { opacity: 0;}
+    to   { opacity: 1;}
+}
+
+.add-food-container {
+  animation: fadein 1s;
+}
 .add-food-header {
   color: rgb(200,0,0);
   font-weight: bolder;
@@ -144,6 +152,7 @@
   justify-content: center;
   margin: 0;
   padding: 0;
+  animation: fadein 1s;
 }
 
 .food-search-bar {
@@ -178,6 +187,7 @@
 
 .add-meal-form-container {
   width: 500px;
+  animation: fadein 2s;
 }
 
 .add-meal-form-header {
