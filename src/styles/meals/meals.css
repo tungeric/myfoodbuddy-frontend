@@ -230,6 +230,18 @@
   text-align: center;
 }
 
+.food-data-delete {
+  color: rgb(200,0,0);
+  text-align: center;
+  margin-right: 2px;
+  opacity: 0.5;
+}
+
+.food-data-delete:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
 .add-food {
   color: rgb(200,0,0);
   font-size: 16px;

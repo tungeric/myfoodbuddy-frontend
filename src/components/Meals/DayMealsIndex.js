@@ -186,6 +186,7 @@ const ALL_DAY_MEALS_QUERY = gql`
       meal_time
       meal_time_since_epoch
       foods {
+        id
         name
         category
         amount_g

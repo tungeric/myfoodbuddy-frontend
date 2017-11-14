@@ -76,7 +76,11 @@ class Meal extends Component {
     if(foods && foods.length > 0) {
       return (
         <div className="food-list">
-          {foods.map((food, idx) => <MealFoodItem key="food.id" food={food} index={idx} />)}
+          {foods.map((food, idx) => <MealFoodItem key="food.id" 
+              getMealsData={this.props.getMealsData} 
+              food={food}
+              meal_id = {this.props.meal.id}
+              index={idx} />)}
           <div className="add-food" onClick={this.openModal}>
             <FontAwesome name="plus-circle"/> Add Food
           </div>
@@ -128,15 +132,11 @@ class Meal extends Component {
   
   render() {
     let mealTime = this.props.meal.meal_time_since_epoch;
-    let date = new Date()
-    date.setUTCSeconds(mealTime)
-    let hours = date.getHours()
-    let minutes = this.pad(date.getMinutes())
-    let ampm = hours >= 12 && hours < 24 ? 'PM' : 'AM'
-    hours = hours%12 === 0 ? 12 : hours%12
+    // console.log(moment(mealTime).format("H:mm A"))
+    let formattedTime = moment(mealTime).locale('en').format("h:mm A")
     return (
       <div className="meal-list-table">
-        <div className="meal-header">{hours}:{minutes} {ampm} - {this.props.meal.name}</div>
+        <div className="meal-header">{formattedTime} - {this.props.meal.name}</div>
         <div className="meal-data-title-bar">
           <div className="meal-data-titles-name"></div>
           <div className="meal-data-titles-cat">Category</div>
@@ -144,6 +144,7 @@ class Meal extends Component {
           <div className="meal-data-titles-pro">Protein (g)</div>
           <div className="meal-data-titles-car">Carbs (g)</div>
           <div className="meal-data-titles-fat">Fat (g)</div>
+          <div className="meal-data-titles-delete"></div>
         </div>
         { this.renderMealFoods() }
         { this.renderMealNutritionTotals() }
