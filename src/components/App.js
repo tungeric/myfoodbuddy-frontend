@@ -5,6 +5,7 @@ import Home from './Home'
 import MealIndex from './Meals/MealIndex'
 import DayMealsIndex from './Meals/DayMealsIndex'
 import CreateFood from './Foods/CreateFood'
+import Trends from './Trends/Trends'
 
 
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path='/meals' component={DayMealsIndex} />
+            <Route exact path='/trends' component={Trends} />
             <Route exact path='/create' component={CreateFood} />
           </Switch>
         </div>

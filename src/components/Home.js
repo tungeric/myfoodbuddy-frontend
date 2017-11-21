@@ -19,7 +19,9 @@ class Home extends Component {
               <div className="splash-ui-link-text-meals">Track and log meals</div>
             </Link>
             <div to='/data' className='splash-ui-button'>
-              <div className="splash-ui-link-text-data">Analyze your trends (not available yet)</div>
+              <Link to='/trends' className='splash-ui-button'>
+                <div className="splash-ui-link-text-data">Analyze your trends=</div>
+              </Link>
             </div>
             <Link to='/create' className='splash-ui-button'>
               <div className="splash-ui-link-text-food">Customize food</div>
