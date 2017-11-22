@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withApollo } from 'react-apollo'
+import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import * as d3 from 'd3'
 
@@ -36,11 +36,46 @@ class Trends extends Component {
   }
 
   render() {
+    console.log(this.props)
+    if (this.props.allMealsQuery && this.props.allMealsQuery.loading) {
+      return <div>Loading</div>
+    }
+
+    if (this.props.allMealsQuery && this.props.allMealsQuery.error) {
+      return <div>Error</div>
+    }
+
+    const mealsToRender = this.props.allMealsQuery.allMeals;
+    console.log(mealsToRender)
+
     return (
       <div className="trends">
+        {mealsToRender.map(meal => (
+          <div>{meal.name}</div>
+        ))}
       </div>
     )
   }
 }
 
-export default Trends;
+const ALL_MEALS_QUERY = gql`
+query AllMealsQuery {
+  allMeals {
+    id
+    name
+    meal_time
+    meal_time_since_epoch
+    foods {
+      id
+      name
+      category
+      amount_g
+      calories
+      protein
+      carbs
+      fat
+    }
+  }
+}`
+
+export default graphql(ALL_MEALS_QUERY, { name: 'allMealsQuery' })(Trends);
