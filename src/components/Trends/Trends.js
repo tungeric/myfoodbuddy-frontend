@@ -14,6 +14,7 @@ class Trends extends Component {
       type: "Calories",
       data: []
     };
+    this.handleFoodTypeChange = this.handleFoodTypeChange.bind(this)
   }
 
   componentDidMount() {
@@ -49,8 +50,15 @@ class Trends extends Component {
     //   .text(function(d) { return d; });
   }
 
+  handleFoodTypeChange(e) {
+    this.setState({
+      type: e.target.value
+    })
+  }
+
   render() {
-    console.log("START OF TODAY:", moment().startOf('day').format('x'))
+    console.log(this.state)
+    // console.log("START OF TODAY:", moment().startOf('day').format('x'))
     if (this.props.allMealsQuery && this.props.allMealsQuery.loading) {
       return <div>Loading</div>
     }
@@ -64,9 +72,12 @@ class Trends extends Component {
 
     return (
       <div className="trends">
-        {mealsToRender.map(meal => (
-          <div>{meal.meal_time_since_epoch}...</div>
-        ))}
+        <select name="food-data-type" onChange={this.handleFoodTypeChange}>
+          <option value="Calories">Calories</option>
+          <option value="Protein">Protein</option>
+          <option value="Carbs">Carbs</option>
+          <option value="Fat">Fat</option>
+        </select>
       </div>
     )
   }
