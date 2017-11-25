@@ -15,6 +15,9 @@ class Header extends Component {
             <Link to='/meals' className='header-link-container'>
               <div className = 'header-link'>Track Meals</div>
             </Link>
+            <Link to='/trends' className='header-link-container'>
+              <div className='header-link'>Analyze Trends</div>
+            </Link>
             <Link to='/create' className='header-link-container'>
               <div className = 'header-link'>Create Food</div>
             </Link>
