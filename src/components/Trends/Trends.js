@@ -9,34 +9,48 @@ import FontAwesome from 'react-fontawesome';
 
 class Trends extends Component {
   constructor() {
-    super()
+    super();
+    this.state = {
+      type: "Calories",
+      data: []
+    };
   }
 
   componentDidMount() {
-    const base = d3.select(".trends");
-    const part1 = base.append("div")
-      .attr("class", "test-div")
-      .attr("width", 600)
-      .attr("height", 600)
-      .style("background-color","green");
+    const unixStartOfLastDay = moment().startOf('day').format('x');
+    let unixDaysInWeek = [];
+    let i=0;
+    while(i < 7) {
+      unixDaysInWeek.push(unixStartOfLastDay - i * 86740000);
+      i+=1;
+    }
+    unixDaysInWeek = unixDaysInWeek.reverse();
+    console.log(unixDaysInWeek);
 
-    const data = [25, 33, 21, 17, 9];
-    const scale = 5;
+    // const base = d3.select(".trends");
+    // const part1 = base.append("div")
+    //   .attr("class", "test-div")
+    //   .attr("width", 600)
+    //   .attr("height", 600)
+    //   .style("background-color","green");
 
-    part1.append("g")
-      .selectAll("g")
-      .data(data)
-      .enter()
-      .append("div")
-      .attr("class","bar")
-      .style("height", function(d) { return d * scale + "px";})
-      .style("width", "100px")
-      .style("background-color","blue")
-      .text(function(d) { return d; });
+    // const data = [25, 33, 21, 17, 9];
+    // const scale = 5;
+
+    // part1.append("g")
+    //   .selectAll("g")
+    //   .data(data)
+    //   .enter()
+    //   .append("div")
+    //   .attr("class","bar")
+    //   .style("height", function(d) { return d * scale + "px";})
+    //   .style("width", "100px")
+    //   .style("background-color","blue")
+    //   .text(function(d) { return d; });
   }
 
   render() {
-    console.log(this.props)
+    console.log("START OF TODAY:", moment().startOf('day').format('x'))
     if (this.props.allMealsQuery && this.props.allMealsQuery.loading) {
       return <div>Loading</div>
     }
@@ -51,7 +65,7 @@ class Trends extends Component {
     return (
       <div className="trends">
         {mealsToRender.map(meal => (
-          <div>{meal.name}</div>
+          <div>{meal.meal_time_since_epoch}...</div>
         ))}
       </div>
     )
