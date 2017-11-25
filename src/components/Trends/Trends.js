@@ -12,6 +12,7 @@ class Trends extends Component {
     super();
     this.state = {
       type: "Calories",
+      daysInUnix: [],
       data: []
     };
     this.handleFoodTypeChange = this.handleFoodTypeChange.bind(this)
@@ -19,14 +20,16 @@ class Trends extends Component {
 
   componentDidMount() {
     const unixStartOfLastDay = moment().startOf('day').format('x');
-    let unixDaysInWeek = [];
+    let daysInUnix = [];
     let i=0;
     while(i < 7) {
-      unixDaysInWeek.push(unixStartOfLastDay - i * 86740000);
+      daysInUnix.push(unixStartOfLastDay - i * 86740000);
       i+=1;
     }
-    unixDaysInWeek = unixDaysInWeek.reverse();
-    console.log(unixDaysInWeek);
+    daysInUnix = daysInUnix.reverse();
+    this.setState({
+      daysInUnix
+    });
 
     // const base = d3.select(".trends");
     // const part1 = base.append("div")
@@ -53,11 +56,16 @@ class Trends extends Component {
   handleFoodTypeChange(e) {
     this.setState({
       type: e.target.value
-    })
+    });
+    const mealsToRender = this.props.allMealsQuery.allMeals;
+    console.log(mealsToRender)
+    // mealsToRender.forEach((meal) => {
+
+    // })
   }
 
   render() {
-    console.log(this.state)
+    console.log("STATE: ", this.state)
     // console.log("START OF TODAY:", moment().startOf('day').format('x'))
     if (this.props.allMealsQuery && this.props.allMealsQuery.loading) {
       return <div>Loading</div>
@@ -66,9 +74,6 @@ class Trends extends Component {
     if (this.props.allMealsQuery && this.props.allMealsQuery.error) {
       return <div>Error</div>
     }
-
-    const mealsToRender = this.props.allMealsQuery.allMeals;
-    console.log(mealsToRender)
 
     return (
       <div className="trends">
