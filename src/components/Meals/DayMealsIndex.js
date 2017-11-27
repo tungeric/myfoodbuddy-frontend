@@ -109,7 +109,7 @@ class DayMealsIndex extends Component {
     if(this.state.meals.length > 0) {
       return (
         <div>
-          { this.state.meals.map((meal, idx) => <Meal getMealsData={this.getMealsData} key="meal.id" meal={meal} index={idx} />) }
+          { this.state.meals.map((meal, idx) => <Meal getMealsData={this.getMealsData} key={meal.id} meal={meal} index={idx} />) }
         </div>
       )
     } else {
