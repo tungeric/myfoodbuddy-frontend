@@ -10,6 +10,7 @@ import Modal from 'react-modal';
 
 import Meal from './Meal'
 import AddMealForm from './AddMealForm'
+import SuggestedFoods from './SuggestedFoods'
 
 class DayMealsIndex extends Component {
   constructor() {
@@ -157,6 +158,7 @@ class DayMealsIndex extends Component {
               onChange={this.handleDateChange} />
           </div>
           { this.renderNutritionTotals() }
+          <SuggestedFoods />
         </div>
         <div className="meal-right">
           <div className="meal-list-header">
