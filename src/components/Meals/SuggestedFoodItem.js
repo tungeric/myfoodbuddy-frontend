@@ -10,9 +10,8 @@ class SuggestedFoodItem extends Component {
     const food = this.props.food
     console.log(food)
     return (
-      <div className="food-data-container">
-        <div className="food-data-name">{food.name} ({food.amount_g} g)</div>
-        <div className="food-data-cals">{food.category}</div>
+      <div className="suggested-food-data-container">
+        <div className="averagest-food-names">{food.name} ({food.category})</div>
       </div>
     )
   }

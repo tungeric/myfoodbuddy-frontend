@@ -109,7 +109,10 @@ class DayMealsIndex extends Component {
     if(this.state.meals.length > 0) {
       return (
         <div>
-          { this.state.meals.map((meal, idx) => <Meal getMealsData={this.getMealsData} key={meal.id} meal={meal} index={idx} />) }
+          <div className="meal-list-content">
+            { this.state.meals.map((meal, idx) => <Meal getMealsData={this.getMealsData} key={meal.id} meal={meal} index={idx} />) }
+          </div>
+          <SuggestedFoods/>
         </div>
       )
     } else {
@@ -158,13 +161,12 @@ class DayMealsIndex extends Component {
               onChange={this.handleDateChange} />
           </div>
           { this.renderNutritionTotals() }
-          <SuggestedFoods />
         </div>
         <div className="meal-right">
           <div className="meal-list-header">
             Here's what you ate on {this.state.date.format('LL')}
           </div>
-          <div className="meal-list-content">
+          <div>
             { this.renderMealList() }
             <div className="add-meal" onClick={this.openModal}>
               <FontAwesome name="cutlery"/> Add Meal
