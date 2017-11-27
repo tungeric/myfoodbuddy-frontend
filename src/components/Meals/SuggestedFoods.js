@@ -55,6 +55,7 @@ const TOP_MOST_AVERAGE_FOODS = gql`
     topMostAverageFoods(limit: 5) {
       name
       averageness_index
+      category
       calories
       protein
       carbs
